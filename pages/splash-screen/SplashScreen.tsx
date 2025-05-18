@@ -7,7 +7,7 @@ export const SplashScreen = () => {
       <S.SplashTitle>FESTO</S.SplashTitle>
       <S.SplashSubTitle>Challenge</S.SplashSubTitle>
       <S.Image>
-        <Image source={require("../../assets/images/logo.png")} />
+        <Image source={require("../../assets/images/logoAzul.png")} />
       </S.Image>
     </S.SplashContainer>
   );

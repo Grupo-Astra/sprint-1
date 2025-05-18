@@ -32,7 +32,7 @@ export const Notifications = () => {
 
   return (
     <S.NotificationContainer>
-      <S.NotificationTitle>Notificações</S.NotificationTitle>
+      <S.NotificationTitle>NOTIFICAÇÕES</S.NotificationTitle>
 
       <SafeAreaProvider>
         <SafeAreaView style={styles.container}>

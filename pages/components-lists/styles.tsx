@@ -14,6 +14,10 @@ export const ComponentsTitle = styled.Text`
   text-align: center;
   margin-top: 5rem;
 `;
+export const FlatCont = styled.View`
+  width: 100%;
+  padding: 1.5rem;
+`;
 export const Nav = styled.View`
   margin-bottom: 0;
 `;
