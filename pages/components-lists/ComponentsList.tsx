@@ -4,7 +4,7 @@ import * as S from "./styles";
 export const ComponentsList = () => {
   return (
     <S.ComponentsContainer>
-      <S.ComponentsTitle>COMPONENTES</S.ComponentsTitle>
+      <S.ComponentsTitle>Lista De Componentes</S.ComponentsTitle>
 
       <S.Nav>
         <NavBar />

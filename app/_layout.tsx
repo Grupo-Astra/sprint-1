@@ -1,5 +1,5 @@
-import { Home } from "@/pages/home/Home";
 import { SplashScreen } from "@/pages/splash-screen/SplashScreen";
+import Route from "@/routes/Route";
 import { useEffect, useState } from "react";
 
 export default function RootLayout() {
@@ -13,5 +13,5 @@ export default function RootLayout() {
     return () => clearTimeout(timer);
   }, []);
 
-  return <>{showSplash ? <SplashScreen /> : <Home />}</>;
+  return <>{showSplash ? <SplashScreen /> : <Route />}</>;
 }

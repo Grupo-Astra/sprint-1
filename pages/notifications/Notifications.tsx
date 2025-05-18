@@ -4,7 +4,7 @@ import * as S from "./styles";
 export const Notifications = () => {
   return (
     <S.NotificationContainer>
-      <S.NotificationTitle>COMPONENTES</S.NotificationTitle>
+      <S.NotificationTitle>Notificações</S.NotificationTitle>
 
       <S.Nav>
         <NavBar />
