@@ -1,27 +1,46 @@
 import { FlatListSensor } from "@/components/flatlist/FlatList";
 import { NavBar } from "@/components/navbar/Navbar";
+import { SensorDataProps } from "@/data/props";
+import { baseSensorData } from "@/data/SensoData";
+import { useEffect, useState } from "react";
 import * as S from "./styles";
 
+const getRandomStatus = () => {
+  const status = ["Normal", "Alerta", "Erro", "Não funcionando"];
+  return status[Math.floor(Math.random() * status.length)];
+};
+
+const getRandomValue = (baseValue: string) => {
+  const glitch = ["-", "Erro", "Desconectado"];
+  return Math.random() < 0.2
+    ? glitch[Math.floor(Math.random() * glitch.length)]
+    : baseValue;
+};
+
 export const Home = () => {
-  const sensores = Array(6)
-    .fill(0)
-    .map((_, i) => (
-      <S.SensorCard key={i}>
-        <S.SensorTitle>Sensor de Pressão</S.SensorTitle>
-        <S.SensorInfoBox>
-          <S.SensorText>última atualização:</S.SensorText>
-          <S.SensorText>status atual:</S.SensorText>
-          <S.SensorText>valor atual:</S.SensorText>
-          <S.SaibaMais>saiba mais</S.SaibaMais>
-        </S.SensorInfoBox>
-      </S.SensorCard>
-    ));
+  const [sensorData, setSensorData] = useState<SensorDataProps[]>([]);
+
+  const updateSensorData = () => {
+    const newData = baseSensorData.map((item) => ({
+      ...item,
+      ultimaAtualizacao: "1min",
+      status: getRandomStatus(),
+      valor: getRandomValue(item.valor),
+    }));
+    setSensorData(newData);
+  };
+
+  useEffect(() => {
+    updateSensorData();
+    const interval = setInterval(updateSensorData, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <S.HomeContainer>
       <S.HomeTitle>COMPONENTES</S.HomeTitle>
       <S.FlatCont>
-        <FlatListSensor data={sensores} />
+        <FlatListSensor data={sensorData} />
       </S.FlatCont>
       <S.Nav>
         <NavBar />
