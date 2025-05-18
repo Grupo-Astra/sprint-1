@@ -10,14 +10,21 @@ import * as S from "./styles";
 export const Notifications = () => {
   const [notifications, setNotifications] = useState<ExampleProps[]>([]);
 
+  const removeNotification = (index: number) => {
+    setNotifications((prev) => prev.filter((_, i) => i !== index));
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       const shuffled = [...baseNotificationData].sort(
         () => 0.5 - Math.random()
       );
-      const selected = shuffled.slice(0, 1);
+      const randomIndex = Math.floor(
+        Math.random() * baseNotificationData.length
+      );
+      const selected = shuffled[randomIndex];
 
-      setNotifications((prev) => [...selected, ...prev]);
+      setNotifications((prev) => [selected, ...prev]);
     }, 4200);
 
     return () => clearInterval(interval);
@@ -31,8 +38,12 @@ export const Notifications = () => {
         <SafeAreaView style={styles.container}>
           <FlatList
             data={notifications}
-            renderItem={({ item }) => (
-              <Examples title={item.title} description={item.description} />
+            renderItem={({ item, index }) => (
+              <Examples
+                title={item.title}
+                description={item.description}
+                onDelete={() => removeNotification(index)}
+              />
             )}
             keyExtractor={(_, index) => index.toString()}
           />
