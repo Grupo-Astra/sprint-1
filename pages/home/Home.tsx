@@ -12,11 +12,11 @@ export const Home = () => {
             <S.HomeTitle>ASTRA</S.HomeTitle>
             <S.Presentation>
               O projeto desenvolvido para a Festo consiste na criação de um
-              gêmeo digital de um sistema pneumático de balancim utilizado no
-              corte de materiais para calçados. Que tem por objetivos simular
-              digitalmente o equipamento físico em operação, monitorar em tempo
-              real o status de todos os componentes, prevenir falhas através de
-              análises preditivas e reduzir tempo de inatividade por manutenção.
+              gêmeo digital de um sistema pneumático de balancim utilizado na
+              indústria têxtil. Que tem por objetivos simular digitalmente o
+              equipamento físico em operação, monitorar em tempo real o status
+              de todos os componentes, prevenir falhas através de análises
+              preditivas e reduzir tempo de inatividade por manutenção
             </S.Presentation>
           </S.ContentWrapper>
 

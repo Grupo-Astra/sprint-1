@@ -1,10 +1,16 @@
+import { ListHistory } from "@/components/list-history/ListHistory";
 import React from "react";
-import { View, Text } from "react-native";
+import * as S from "./styles";
 
- export const History = () => {
+export const History = () => {
   return (
-    <View>
-      <Text>Histórico do Sensor</Text>
-    </View>
+    <S.ContainerHistory>
+      <S.HistoryTitle>Histórico de Funcionamento</S.HistoryTitle>
+
+      <ListHistory />
+      {/* <S.Nav>
+        <NavBar />
+      </S.Nav> */}
+    </S.ContainerHistory>
   );
 };

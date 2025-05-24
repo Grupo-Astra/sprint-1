@@ -1,0 +1,58 @@
+export const HistoryData = [
+  {
+    id: 1,
+    dispositivo: "Sensor de Pressão",
+    acao: "Detectou variação de 3 bar para 5 bar",
+    horario: "24/05/2025 08:15",
+    status: "Ativo",
+  },
+  {
+    id: 2,
+    dispositivo: "Sensor de Posição",
+    acao: "Detectou posição final do pistão",
+    horario: "24/05/2025 08:16",
+    status: "Ativo",
+  },
+  {
+    id: 3,
+    dispositivo: "Sensor de Proximidade",
+    acao: "Detectou objeto a 2 cm",
+    horario: "24/05/2025 08:16",
+    status: "Ativo",
+  },
+  {
+    id: 4,
+    dispositivo: "Sensor de Carga",
+    acao: "Carga excedeu 80kg",
+    horario: "24/05/2025 08:17",
+    status: "Alerta",
+  },
+  {
+    id: 5,
+    dispositivo: "Atuador Pneumático",
+    acao: "Avanço realizado",
+    horario: "24/05/2025 08:17",
+    status: "Executado",
+  },
+  {
+    id: 6,
+    dispositivo: "Válvula Solenoide",
+    acao: "Ativada para liberar ar comprimido",
+    horario: "24/05/2025 08:18",
+    status: "Ativo",
+  },
+  {
+    id: 7,
+    dispositivo: "Regulador de Pressão",
+    acao: "Ajustou pressão para 6 bar",
+    horario: "24/05/2025 08:18",
+    status: "Ajustado",
+  },
+  {
+    id: 8,
+    dispositivo: "Controlador Lógico (CLP)",
+    acao: "Executou rotina de controle de ciclo",
+    horario: "24/05/2025 08:19",
+    status: "Concluído",
+  },
+];
