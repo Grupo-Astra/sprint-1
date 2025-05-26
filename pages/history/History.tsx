@@ -1,16 +1,29 @@
 import { ListHistory } from "@/components/list-history/ListHistory";
-import React from "react";
+import { HistoryData } from "@/data/HistoryData";
+import React, { useState } from "react";
+import { ScrollView } from "react-native";
 import * as S from "./styles";
 
 export const History = () => {
-  return (
-    <S.ContainerHistory>
-      <S.HistoryTitle>Histórico de Funcionamento</S.HistoryTitle>
+  const [visibleCount, setVisibleCount] = useState(5);
 
-      <ListHistory />
-      {/* <S.Nav>
-        <NavBar />
-      </S.Nav> */}
-    </S.ContainerHistory>
+  const handleLoadMore = () => {
+    if (visibleCount < HistoryData.length) {
+      setVisibleCount((prev) => prev + 1);
+    }
+  };
+
+  return (
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <S.ContainerHistory>
+        <S.HistoryTitle>Histórico de Funcionamento</S.HistoryTitle>
+
+        <ListHistory visibleCount={visibleCount} />
+
+        <S.ContButton>
+          <S.ButtonHistory onPress={handleLoadMore}>Atualizar</S.ButtonHistory>
+        </S.ContButton>
+      </S.ContainerHistory>
+    </ScrollView>
   );
 };
