@@ -6,13 +6,13 @@ import { FlatListProps } from "./props";
 import * as S from "./styles";
 
 export const FlatListSensor = ({ data }: FlatListProps) => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  // const navigation =
+  //   useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const renderItem: ListRenderItem<FlatListProps["data"][number]> = ({
     item,
   }) => (
-    <S.SensorCard onPress={() => navigation.navigate("History")}>
+    <S.SensorCard >
       <S.SensorTitle>{item.nome}</S.SensorTitle>
       <S.SensorInfoBox>
         <S.SensorText>

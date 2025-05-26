@@ -12,7 +12,7 @@ export const FlatCont = styled.View`
   width: 100%;
   padding: 1.5rem;
 `;
-export const SensorCard = styled.TouchableOpacity`
+export const SensorCard = styled.View`
   width: 400px;
   height: 250px;
   background-color: #c6e8eb;
