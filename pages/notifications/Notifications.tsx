@@ -25,7 +25,7 @@ export const Notifications = () => {
       const selected = shuffled[randomIndex];
 
       setNotifications((prev) => [selected, ...prev]);
-    }, 12000);
+    }, 2700);
 
     return () => clearInterval(interval);
   }, []);
