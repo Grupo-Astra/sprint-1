@@ -9,10 +9,10 @@ export const NotificationContainer = styled.View`
 `;
 
 export const NotificationTitle = styled.Text`
-  font-size: 3rem;
+  font-size: 30px;
   font-family: ${Fonts.Cinzel};
   text-align: center;
-  margin-top: 5rem;
+  margin-top: 50px;
 `;
 export const Nav = styled.View`
   margin-bottom: 0;

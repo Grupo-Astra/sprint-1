@@ -1,9 +1,12 @@
 import { NavBar } from "@/components/navbar/Navbar";
-import { ScrollView } from "react-native";
+import { ScrollView, useWindowDimensions } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import * as S from "./styles";
 
 export const Home = () => {
+  const { width } = useWindowDimensions();
+  const showImage = width > 380;
+
   return (
     <SafeAreaProvider>
       <S.HomeContainer>
@@ -20,18 +23,18 @@ export const Home = () => {
             </S.Presentation>
           </S.ContentWrapper>
 
-          <S.ImageWrapper>
-            <S.LogoImage
-              source={require("../../assets/images/logoBranca.png")}
-              style={{ paddingBottom: 120 }}
-            />
-          </S.ImageWrapper>
+          {showImage && (
+            <S.ImageWrapper>
+              <S.LogoImage
+                source={require("../../assets/images/logoBranca.png")}
+              />
+            </S.ImageWrapper>
+          )}
         </ScrollView>
-
-        <S.Nav>
-          <NavBar />
-        </S.Nav>
       </S.HomeContainer>
+      <S.NavBarContainer>
+        <NavBar />
+      </S.NavBarContainer>
     </SafeAreaProvider>
   );
 };

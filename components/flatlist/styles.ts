@@ -10,7 +10,7 @@ export const FlatlistContainer = styled.View`
 `;
 export const FlatCont = styled.View`
   width: 100%;
-  padding: 1.5rem;
+  padding: 15px;
 `;
 export const SensorCard = styled.View`
   width: 400px;
@@ -26,7 +26,7 @@ export const SensorCard = styled.View`
 export const SensorTitle = styled.Text`
   font-weight: bold;
   text-align: center;
-  font-size: 2rem;
+  font-size: 20px;
   font-family: ${Fonts.Jaldi};
 `;
 
@@ -39,15 +39,7 @@ export const SensorInfoBox = styled.View`
 `;
 
 export const SensorText = styled.Text`
-  font-size: 1.2rem;
-  line-height: 2rem;
-  font-family: ${Fonts.Jaldi};
-`;
-
-export const SaibaMais = styled.Text`
-  color: #009dff;
-  font-size: 1.2rem;
-  margin-top: 8px;
-  align-self: flex-end;
+  font-size: 20px;
+  line-height: 40px;
   font-family: ${Fonts.Jaldi};
 `;

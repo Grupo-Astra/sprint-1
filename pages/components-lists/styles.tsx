@@ -9,14 +9,14 @@ export const ComponentsContainer = styled.View`
 `;
 
 export const ComponentsTitle = styled.Text`
-  font-size: 3rem;
+  font-size: 30px;
   font-family: ${Fonts.Cinzel};
   text-align: center;
-  margin-top: 5rem;
+  margin-top: 50px;
 `;
 export const FlatCont = styled.View`
   width: 100%;
-  padding: 1.5rem;
+  padding: 15px;
 `;
 export const Nav = styled.View`
   margin-bottom: 0;
