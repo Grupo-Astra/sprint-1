@@ -3,5 +3,5 @@ export interface SensorHistoryEntry {
   value: number;
   status: string;
   timestamp: string;
-  sensor_id: number;
+  sensorId: number;
 }
