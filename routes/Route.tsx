@@ -25,10 +25,11 @@ export default function Route() {
         component={ComponentsList}
         options={{ headerShown: false }}
       />
-      <Stack.Screen 
-      name="History" 
-      component={History} 
-      options={{headerShown: false}}/>
+      <Stack.Screen
+        name="History"
+        component={History}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }

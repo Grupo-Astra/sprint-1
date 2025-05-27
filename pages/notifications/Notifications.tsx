@@ -17,10 +17,10 @@ export const Notifications = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       const shuffled = [...baseNotificationData].sort(
-        () => 0.5 - Math.random()
+        () => 0.5 - Math.random(),
       );
       const randomIndex = Math.floor(
-        Math.random() * baseNotificationData.length
+        Math.random() * baseNotificationData.length,
       );
       const selected = shuffled[randomIndex];
 

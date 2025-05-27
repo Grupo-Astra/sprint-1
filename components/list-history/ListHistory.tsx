@@ -7,7 +7,7 @@ import * as S from "./styles";
 export const ListHistory: React.FC<ListHistoryProps> = ({ visibleCount }) => {
   const slicedData = HistoryData.sort((a, b) => a.id - b.id).slice(
     0,
-    visibleCount
+    visibleCount,
   );
 
   return (

@@ -15,8 +15,7 @@ export const HistoryTitle = styled.Text`
 export const ContButton = styled.View`
   display: flex;
   align-items: center;
-  padding-bottom: 60px
-
+  padding-bottom: 60px;
 `;
 export const ButtonHistory = styled.TouchableOpacity`
   background-color: #c6e8eb;
@@ -35,4 +34,3 @@ export const NavBarContainer = styled.View`
   position: absolute;
   bottom: 0;
 `;
-

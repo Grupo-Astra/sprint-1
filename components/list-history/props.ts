@@ -1,3 +1,3 @@
 export interface ListHistoryProps {
-    visibleCount: number;
+  visibleCount: number;
 }
