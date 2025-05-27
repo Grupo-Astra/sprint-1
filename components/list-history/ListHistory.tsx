@@ -1,25 +1,36 @@
-import { HistoryData } from "@/data/HistoryData";
 import React from "react";
 import { FlatList } from "react-native";
 import { ListHistoryProps } from "./props";
 import * as S from "./styles";
 
-export const ListHistory: React.FC<ListHistoryProps> = ({ visibleCount }) => {
-  const slicedData = HistoryData.sort((a, b) => a.id - b.id).slice(
-    0,
-    visibleCount,
+export const ListHistory: React.FC<ListHistoryProps> = ({ sensors }) => {
+  const allEntries = sensors.flatMap((sensor) =>
+    sensor.historic.map((entry) => ({
+      id: entry.id,
+      name: sensor.name,
+      value: entry.value,
+      status: entry.status,
+      timestamp: entry.timestamp,
+    })),
+  );
+
+  const sortedEntrties = allEntries.sort(
+    (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
   );
 
   return (
     <S.ListContainer>
       <FlatList
-        data={slicedData}
+        data={sortedEntrties}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <S.ItemContainer>
-            <S.ItemTitle>{item.dispositivo}</S.ItemTitle>
-            <S.ItemDescription>{item.acao}</S.ItemDescription>
-            <S.ItemTime>{item.horario}</S.ItemTime>
+            <S.ItemTitle>{item.name}</S.ItemTitle>
+            <S.ItemDescription>
+              Valor: {item.value.toFixed(4)}
+            </S.ItemDescription>
+            <S.ItemDescription>Status: {item.status}</S.ItemDescription>
+            <S.ItemTime>{new Date(item.timestamp).toLocaleString()}</S.ItemTime>
           </S.ItemContainer>
         )}
       />

@@ -1,3 +1,5 @@
+import { SensorWithHistory } from "@/types/sensorWithHistory";
+
 export interface ListHistoryProps {
-  visibleCount: number;
+  sensors: SensorWithHistory[];
 }
