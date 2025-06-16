@@ -22,9 +22,28 @@ O principal propósito do projeto é:
 
 # 🚀 Como executar
 
+Nesta segunda entrega, o aplicativo está separado em duas partes:
+
+- Frontend, neste repositório;
+- Backend, disponível no [seguinte repositório](https://github.com/Grupo-Astra/apmd-go-api).
+
+Para funcionar corretamente, as duas partes devem ser executadas simultaneamente.
+
+## Executando o Backend
+
+Clone o [repositório do backend](https://github.com/Grupo-Astra/apmd-go-api) e siga
+as instruções contidas em seu README para compilar a API ou executar via Docker.
+
+Com o backend rodando em uma instância do terminal (ou como um
+processo no plano de fundo do sistema), execute o Frontend em outra instância.
+
+## Executando o Frontend
+
 Clone o repositório e, dentro da pasta do projeto, execute:
 
-`npm start`
+```sh
+npm start
+```
 
 Em seguida:
 
