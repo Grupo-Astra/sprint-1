@@ -39,7 +39,13 @@ processo no plano de fundo do sistema), execute o Frontend em outra instância.
 
 ## Executando o Frontend
 
-Clone o repositório e, dentro da pasta do projeto, execute:
+Clone o repositório e, dentro da pasta do projeto, baixe as dependências com:
+
+```sh
+npm install
+```
+
+Então, para iniciar o aplicativo, execute:
 
 ```sh
 npm start
