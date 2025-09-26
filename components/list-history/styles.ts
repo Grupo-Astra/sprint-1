@@ -11,7 +11,7 @@ export const ItemContainer = styled.View`
   border-top-color: #000;
   border-bottom-width: 1px;
   border-bottom-color: #000;
-  width: 500px;
+  width: 900px;
 `;
 
 export const ItemTitle = styled.Text`

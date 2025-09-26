@@ -51,23 +51,28 @@ export const Graphs = ({ sensors }: GraphProps) => {
               labels: chartLabels,
               datasets,
             }}
-            width={Dimensions.get("window").width - 50}
+            width={Dimensions.get("window").width - 100}
             height={220}
             yAxisInterval={1}
             chartConfig={{
-              backgroundColor: "#0294a6",
-              decimalPlaces: 2,
-              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-              labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-              style: { borderRadius: 16 },
-              propsForDots: { 
-                r: "6", 
-                strokeWidth: "2", 
-                stroke: "#c6e8eb",
-              },
-            }}
-            bezier
-            style={{ marginVertical: 8, borderRadius: 16 }}
+                backgroundGradientFrom: "#0294a6",  // cor de fundo inicial do gradiente
+                backgroundGradientTo: "#0294a6",    // cor de fundo final do gradiente
+                decimalPlaces: 2,
+                color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,       // cor das linhas
+                labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, // cor dos textos
+                style: {
+                  borderRadius: 16,
+                },
+                propsForDots: {
+                  r: "6",
+                  strokeWidth: "2",
+                  stroke: "#000",
+                },
+              }}
+              style={{
+                borderRadius: 16,
+                backgroundColor: "#0294a6", // cor real do fundo do container
+              }}
             decorator={() => {
               return tooltipData ? (
                 <View

@@ -16,15 +16,14 @@ export const History = () => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <S.ContainerHistory>
+        
+        <S.GraphSection>
+          <Graphs sensors={sensorsWithHistory} />
+        </S.GraphSection>
 
-        <S.ContentRow>
-          <S.ListColumn>
-            <ListHistory sensors={sensorsWithHistory} />
-          </S.ListColumn>
-          <S.GraphColumn>
-            <Graphs sensors={sensorsWithHistory} />
-          </S.GraphColumn>
-        </S.ContentRow>
+        <S.ListSection>
+          <ListHistory sensors={sensorsWithHistory} />
+        </S.ListSection>
 
         <S.ContButton>
           <S.ButtonHistory onPress={handleUpdate} disabled={loading}>

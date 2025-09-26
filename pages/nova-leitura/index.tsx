@@ -27,12 +27,12 @@ export const NovaLeitura = () => {
 
         try {
             const sensorData = {
-                name: name.trim(), // Campo correto: name
-                currentValue: numericValue, // Campo correto: currentValue
-                currentStatus: currentStatus.trim() // Campo correto: currentStatus
+                name: name.trim(),
+                currentValue: numericValue,
+                currentStatus: currentStatus.trim()
             };
 
-            console.log('Enviando dados:', sensorData); // Para debug
+            console.log('Enviando dados:', sensorData); 
 
             await createSensorReading(sensorData);
             
