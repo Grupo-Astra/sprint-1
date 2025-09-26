@@ -1,10 +1,10 @@
 import { ComponentsList } from "@/pages/components-lists/ComponentsList";
+import { History } from "@/pages/history/History";
 import { Home } from "@/pages/home/Home";
 import { Notifications } from "@/pages/notifications/Notifications";
+import { NovaLeitura } from "@/pages/nova-leitura";
 import { RootStackParamList } from "@/types/navigation";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { History } from "@/pages/history/History";
-
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function Route() {
@@ -28,6 +28,11 @@ export default function Route() {
       <Stack.Screen
         name="History"
         component={History}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="NovaLeitura"
+        component={NovaLeitura}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

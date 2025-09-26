@@ -14,6 +14,7 @@ export const ContButton = styled.View`
   display: flex;
   align-items: center;
   padding-bottom: 60px;
+  gap: 20px;
 `;
 
 export const ContentRow = styled.View`
@@ -55,3 +56,4 @@ export const NavBarContainer = styled.View`
   position: absolute;
   bottom: 0;
 `;
+
