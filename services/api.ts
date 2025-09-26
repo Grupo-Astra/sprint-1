@@ -24,9 +24,9 @@ export const fetchSensorWithHistory = async (
   return response.data;
 };
 export const createSensorReading = async (sensorData: {
-  sensorName: string;
+  name: string;
   currentValue: number;
-  status: string;
+  currentStatus: string;
 }): Promise<any> => {
   const response = await api.post("readings", sensorData);
   return response.data;
