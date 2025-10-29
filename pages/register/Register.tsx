@@ -14,18 +14,22 @@ interface Props {
 }
 
 export function Register({ navigation }: Props) {
-  const [name, setName] = useState("");
+  const [username, setUserame] = useState("");
   const [password, setPassword] = useState("");
   const { signUp } = useAuth();
+
+  const handleRegister = () => {
+    signUp({ username, password });
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Cadastro</Text>
       <TextInput
         style={styles.input}
-        placeholder="Nome"
-        value={name}
-        onChangeText={setName}
+        placeholder="Username"
+        value={username}
+        onChangeText={setUserame}
       />
       <TextInput
         style={styles.input}
@@ -35,7 +39,7 @@ export function Register({ navigation }: Props) {
         secureTextEntry
       />
       <View style={styles.buttonGap}>
-        <Button title="Cadastrar" onPress={signUp} />
+        <Button title="Cadastrar" onPress={handleRegister} />
       </View>
       <Button
         title="Fazer Login"

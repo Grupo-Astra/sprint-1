@@ -18,6 +18,10 @@ export function Login({ navigation }: Props) {
   const [password, setPassword] = useState("");
   const { signIn } = useAuth();
 
+  const handleLogin = () => {
+    signIn({ username, password });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
@@ -36,7 +40,7 @@ export function Login({ navigation }: Props) {
         secureTextEntry
       />
       <View style={styles.buttonGap}>
-        <Button title="Login" onPress={signIn} />
+        <Button title="Login" onPress={handleLogin} />
       </View>
       <Button
         title="Cadastrar"

@@ -5,13 +5,43 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import * as SecureStore from "expo-secure-store";
+import api from "@/services/api";
+import { Credentials } from "@/types/credentials";
+
+const TOKEN_KEY = "user_token";
+
+async function saveToken(token: string): Promise<void> {
+  try {
+    await SecureStore.setItemAsync(TOKEN_KEY, token);
+  } catch (error) {
+    console.error("Erro ao salvar o token", error);
+  }
+}
+
+async function getToken(): Promise<string | null> {
+  try {
+    return await SecureStore.getItemAsync(TOKEN_KEY);
+  } catch (error) {
+    console.error("Erro ao ler o token", error);
+    return null;
+  }
+}
+
+async function removeToken(): Promise<void> {
+  try {
+    await SecureStore.deleteItemAsync(TOKEN_KEY);
+  } catch (error) {
+    console.error("Erro ao remover o token", error);
+  }
+}
 
 interface AuthContextData {
   userToken: string | null;
   isLoading: boolean;
-  signIn: () => Promise<void>;
+  signIn: (credentials: Credentials) => Promise<void>;
   signOut: () => Promise<void>;
-  signUp: () => Promise<void>;
+  signUp: (credentials: Credentials) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -22,33 +52,36 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [userToken, setUserToken] = useState<string | null>(null);
-
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
-      // TODO: checar token salvo (fase de conexão da API)
+    async function loadTokenFromStorage() {
+      const storedToken = await getToken();
+
+      if (storedToken) {
+        api.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
+        setUserToken(storedToken);
+      }
       setIsLoading(false);
-    }, 1500);
+    }
+
+    loadTokenFromStorage();
   }, []);
 
-  // TODO: substituir mocks pelas implementações reais (após conexão na API)
-  const signIn = async () => {
-    console.log("Mock: SignIn");
-    console.log(userToken);
-
+  const signIn = async ({ username, password }: Credentials) => {
+    console.log("Mock: SignIn", username);
     setIsLoading(true);
+
     setTimeout(() => {
-      setUserToken("dummy-token");
+      setUserToken("dummy-token-signin");
       setIsLoading(false);
     }, 500);
   };
 
-  const signUp = async () => {
-    console.log("Mock: SignUp");
-    console.log(userToken);
-
+  const signUp = async ({ username, password }: Credentials) => {
+    console.log("Mock: SignUp", username);
     setIsLoading(true);
+
     setTimeout(() => {
       setUserToken("dummy-token-signup");
       setIsLoading(false);
@@ -57,9 +90,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const signOut = async () => {
     console.log("Mock: SignOut");
-    console.log(userToken);
-
     setIsLoading(true);
+
     setTimeout(() => {
       setUserToken(null);
       setIsLoading(false);
@@ -77,10 +109,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 export function useAuth() {
   const context = useContext(AuthContext);
-
   if (!context) {
     throw new Error("useAuth must be used within an AuthProvider");
   }
-
   return context;
 }
