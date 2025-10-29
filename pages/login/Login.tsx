@@ -2,7 +2,14 @@ import { useAuth } from "@/contexts/AuthContext";
 import { RootStackParamList } from "@/types/navigation";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+  ActivityIndicator,
+} from "react-native";
 
 type LoginScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -16,7 +23,7 @@ interface Props {
 export function Login({ navigation }: Props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { signIn } = useAuth();
+  const { signIn, isLoading, error } = useAuth();
 
   const handleLogin = () => {
     signIn({ username, password });
@@ -25,12 +32,14 @@ export function Login({ navigation }: Props) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
+
       <TextInput
         style={styles.input}
         placeholder="Username"
         value={username}
         onChangeText={setUsername}
         autoCapitalize="none"
+        editable={!isLoading}
       />
       <TextInput
         style={styles.input}
@@ -38,21 +47,37 @@ export function Login({ navigation }: Props) {
         value={password}
         onChangeText={setPassword}
         secureTextEntry
+        editable={!isLoading}
       />
-      <View style={styles.buttonGap}>
-        <Button title="Login" onPress={handleLogin} />
-      </View>
-      <Button
-        title="Cadastrar"
-        onPress={() => navigation.navigate("Register")}
-        color="#888"
-      />
+
+      {error && <Text style={styles.errorText}>{error}</Text>}
+
+      {isLoading ? (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : (
+        <>
+          <View style={styles.buttonGap}>
+            <Button title="Login" onPress={handleLogin} />
+          </View>
+          <Button
+            title="Cadastrar"
+            onPress={() => navigation.navigate("Register")}
+            color="#888"
+          />
+        </>
+      )}
     </View>
   );
 }
 
 // TODO: implementar estilos como no Figma
 const styles = StyleSheet.create({
+  errorText: {
+    color: "red",
+    textAlign: "center",
+    marginBottom: 10,
+    fontSize: 16,
+  },
   container: {
     flex: 1,
     justifyContent: "center",

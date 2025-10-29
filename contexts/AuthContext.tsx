@@ -8,6 +8,7 @@ import React, {
 import * as SecureStore from "expo-secure-store";
 import api from "@/services/api";
 import { Credentials } from "@/types/credentials";
+import axios from "axios";
 
 const TOKEN_KEY = "user_token";
 
@@ -39,6 +40,7 @@ async function removeToken(): Promise<void> {
 interface AuthContextData {
   userToken: string | null;
   isLoading: boolean;
+  error: string | null;
   signIn: (credentials: Credentials) => Promise<void>;
   signOut: () => Promise<void>;
   signUp: (credentials: Credentials) => Promise<void>;
@@ -53,54 +55,86 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [userToken, setUserToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function loadTokenFromStorage() {
       const storedToken = await getToken();
-
       if (storedToken) {
         api.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
         setUserToken(storedToken);
       }
       setIsLoading(false);
     }
-
     loadTokenFromStorage();
   }, []);
 
   const signIn = async ({ username, password }: Credentials) => {
-    console.log("Mock: SignIn", username);
     setIsLoading(true);
+    setError(null);
 
-    setTimeout(() => {
-      setUserToken("dummy-token-signin");
+    try {
+      const response = await api.post("/auth/login", { username, password });
+      const { token } = response.data;
+
+      if (token) {
+        api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        await saveToken(token);
+        setUserToken(token);
+      } else {
+        setError("Token não recebido da API.");
+      }
+    } catch (e) {
+      console.error("Erro no signIn:", e);
+      if (axios.isAxiosError(e) && e.response?.status == 401) {
+        setError("Usuário ou senha inválidos.");
+      } else {
+        setError("Não foi possível conectar ao servidor.");
+      }
+    } finally {
       setIsLoading(false);
-    }, 500);
+    }
   };
 
   const signUp = async ({ username, password }: Credentials) => {
-    console.log("Mock: SignUp", username);
     setIsLoading(true);
+    setError(null);
 
-    setTimeout(() => {
-      setUserToken("dummy-token-signup");
+    try {
+      await api.post("/auth/register", { username, password });
+      await signIn({ username, password });
+    } catch (e) {
+      console.error("Erro no signUp:", e);
+      if (axios.isAxiosError(e) && e.response?.status === 409) {
+        setError("Este nome de usuário já está em uso.");
+      } else {
+        setError("Erro ao tentar registrar.");
+      }
       setIsLoading(false);
-    }, 500);
+    }
   };
 
   const signOut = async () => {
-    console.log("Mock: SignOut");
     setIsLoading(true);
+    setError(null);
 
-    setTimeout(() => {
+    try {
+      await removeToken();
+
+      delete api.defaults.headers.common["Authorization"];
+
       setUserToken(null);
+    } catch (e) {
+      console.error("Erro no signOut:", e);
+      setError("Erro ao tentar sair.");
+    } finally {
       setIsLoading(false);
-    }, 500);
+    }
   };
 
   return (
     <AuthContext.Provider
-      value={{ userToken, isLoading, signIn, signOut, signUp }}
+      value={{ userToken, isLoading, error, signIn, signOut, signUp }}
     >
       {children}
     </AuthContext.Provider>
