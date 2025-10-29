@@ -1,9 +1,22 @@
+import { useAuth } from "@/contexts/AuthContext";
+import { RootStackParamList } from "@/types/navigation";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 
-export function Login() {
+type LoginScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "Login"
+>;
+
+interface Props {
+  navigation: LoginScreenNavigationProp;
+}
+
+export function Login({ navigation }: Props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { signIn } = useAuth();
 
   return (
     <View style={styles.container}>
@@ -23,14 +36,11 @@ export function Login() {
         secureTextEntry
       />
       <View style={styles.buttonGap}>
-        <Button
-          title="Login"
-          onPress={() => console.log("Login selecionado")} // Placeholder
-        />
+        <Button title="Login" onPress={signIn} />
       </View>
       <Button
         title="Cadastrar"
-        onPress={() => console.log("Cadastro selecionado")} // Placeholder
+        onPress={() => navigation.navigate("Register")}
         color="#888"
       />
     </View>

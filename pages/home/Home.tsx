@@ -1,11 +1,13 @@
 import { NavBar } from "@/components/navbar/Navbar";
-import { ScrollView, useWindowDimensions } from "react-native";
+import { Button, ScrollView, useWindowDimensions } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import * as S from "./styles";
+import { useAuth } from "@/contexts/AuthContext";
 
 export const Home = () => {
   const { width } = useWindowDimensions();
   const showImage = width > 380;
+  const { signOut } = useAuth();
 
   return (
     <SafeAreaProvider>
@@ -13,6 +15,9 @@ export const Home = () => {
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <S.ContentWrapper>
             <S.HomeTitle>ASTRA</S.HomeTitle>
+
+            <Button title="SAIR (TESTE)" onPress={signOut} color="red" />
+
             <S.Presentation>
               O projeto desenvolvido para a Festo consiste na criação de um
               gêmeo digital de um sistema pneumático de balancim utilizado na

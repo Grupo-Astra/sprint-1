@@ -6,6 +6,8 @@ export type RootStackParamList = {
   ComponentsList: undefined;
   History: undefined;
   NovaLeitura: undefined;
+  Login: undefined;
+  Register: undefined;
 };
 
 export type Props = NativeStackScreenProps<RootStackParamList>;

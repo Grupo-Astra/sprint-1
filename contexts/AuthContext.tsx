@@ -35,6 +35,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   // TODO: substituir mocks pelas implementações reais (após conexão na API)
   const signIn = async () => {
     console.log("Mock: SignIn");
+    console.log(userToken);
+
     setIsLoading(true);
     setTimeout(() => {
       setUserToken("dummy-token");
@@ -44,6 +46,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const signUp = async () => {
     console.log("Mock: SignUp");
+    console.log(userToken);
+
     setIsLoading(true);
     setTimeout(() => {
       setUserToken("dummy-token-signup");
@@ -53,6 +57,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const signOut = async () => {
     console.log("Mock: SignOut");
+    console.log(userToken);
+
     setIsLoading(true);
     setTimeout(() => {
       setUserToken(null);
