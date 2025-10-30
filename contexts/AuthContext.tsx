@@ -1,12 +1,13 @@
 import React, {
   createContext,
   ReactNode,
+  useCallback,
   useContext,
   useEffect,
   useState,
 } from "react";
 import * as SecureStore from "expo-secure-store";
-import api from "@/services/api";
+import api, { setupAuthInterceptor } from "@/services/api";
 import { Credentials } from "@/types/credentials";
 import axios from "axios";
 
@@ -69,7 +70,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     loadTokenFromStorage();
   }, []);
 
-  const signIn = async ({ username, password }: Credentials) => {
+  const signIn = useCallback(async ({ username, password }: Credentials) => {
     setIsLoading(true);
     setError(null);
 
@@ -94,35 +95,36 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
-  const signUp = async ({ username, password }: Credentials) => {
-    setIsLoading(true);
-    setError(null);
+  const signUp = useCallback(
+    async ({ username, password }: Credentials) => {
+      setIsLoading(true);
+      setError(null);
 
-    try {
-      await api.post("/auth/register", { username, password });
-      await signIn({ username, password });
-    } catch (e) {
-      console.error("Erro no signUp:", e);
-      if (axios.isAxiosError(e) && e.response?.status === 409) {
-        setError("Este nome de usuário já está em uso.");
-      } else {
-        setError("Erro ao tentar registrar.");
+      try {
+        await api.post("/auth/register", { username, password });
+        await signIn({ username, password });
+      } catch (e) {
+        console.error("Erro no signUp:", e);
+        if (axios.isAxiosError(e) && e.response?.status === 409) {
+          setError("Este nome de usuário já está em uso.");
+        } else {
+          setError("Erro ao tentar registrar.");
+        }
+        setIsLoading(false);
       }
-      setIsLoading(false);
-    }
-  };
+    },
+    [signIn],
+  );
 
-  const signOut = async () => {
+  const signOut = useCallback(async () => {
     setIsLoading(true);
     setError(null);
 
     try {
       await removeToken();
-
       delete api.defaults.headers.common["Authorization"];
-
       setUserToken(null);
     } catch (e) {
       console.error("Erro no signOut:", e);
@@ -130,7 +132,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    setupAuthInterceptor(signOut);
+  }, [signOut]);
 
   return (
     <AuthContext.Provider

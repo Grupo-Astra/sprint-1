@@ -10,6 +10,24 @@ const api = axios.create({
   },
 });
 
+export const setupAuthInterceptor = (signOut: () => Promise<void>) => {
+  api.interceptors.response.use(
+    (response) => response,
+
+    async (error) => {
+      if (axios.isAxiosError(error) && error.response) {
+        if (error.response.status == 401) {
+          if (error.config?.url != "/auth/login") {
+            console.warn("Token expirado ou inválido. Deslogando...");
+            await signOut();
+          }
+        }
+      }
+      return Promise.reject(error);
+    },
+  );
+};
+
 export default api;
 
 export const fetchSensors = async (): Promise<Sensor[]> => {
@@ -31,3 +49,4 @@ export const createSensorReading = async (sensorData: {
   const response = await api.post("readings", sensorData);
   return response.data;
 };
+
