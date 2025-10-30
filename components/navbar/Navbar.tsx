@@ -5,6 +5,7 @@ import {
   ClockCounterClockwise,
   House,
   ListDashes,
+  User,
 } from "phosphor-react-native";
 import { TouchableOpacity } from "react-native";
 import * as S from "./styles";
@@ -28,6 +29,10 @@ export const NavBar = () => {
 
       <TouchableOpacity onPress={() => navigation.navigate("History")}>
         <ClockCounterClockwise size={50} color="white" />
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+        <User size={50} color="white" />
       </TouchableOpacity>
     </S.NavBarContainer>
   );

@@ -5,10 +5,10 @@ import { Home } from "@/pages/home/Home";
 import { Login } from "@/pages/login/Login";
 import { Notifications } from "@/pages/notifications/Notifications";
 import { NovaLeitura } from "@/pages/nova-leitura";
+import { Profile } from "@/pages/profile/Profile";
 import { Register } from "@/pages/register/Register";
 import { RootStackParamList } from "@/types/navigation";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const AppStackNav = createNativeStackNavigator<RootStackParamList>();
 const AuthStackNav = createNativeStackNavigator<RootStackParamList>();
@@ -39,6 +39,11 @@ function AppStack() {
       <AppStackNav.Screen
         name="NovaLeitura"
         component={NovaLeitura}
+        options={{ headerShown: false }}
+      />
+      <AppStackNav.Screen
+        name="Profile"
+        component={Profile}
         options={{ headerShown: false }}
       />
     </AppStackNav.Navigator>

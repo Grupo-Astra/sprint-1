@@ -6,6 +6,7 @@ export type RootStackParamList = {
   ComponentsList: undefined;
   History: undefined;
   NovaLeitura: undefined;
+  Profile: undefined;
   Login: undefined;
   Register: undefined;
 };
