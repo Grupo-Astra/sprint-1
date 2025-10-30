@@ -10,12 +10,18 @@ import * as SecureStore from "expo-secure-store";
 import api, { setupAuthInterceptor } from "@/services/api";
 import { Credentials } from "@/types/credentials";
 import axios from "axios";
+import { Platform } from "react-native";
 
 const TOKEN_KEY = "user_token";
 
 async function saveToken(token: string): Promise<void> {
   try {
-    await SecureStore.setItemAsync(TOKEN_KEY, token);
+    if (Platform.OS === "web") {
+      localStorage.setItem(TOKEN_KEY, token);
+      return Promise.resolve();
+    } else {
+      return await SecureStore.setItemAsync(TOKEN_KEY, token);
+    }
   } catch (error) {
     console.error("Erro ao salvar o token", error);
   }
@@ -23,7 +29,12 @@ async function saveToken(token: string): Promise<void> {
 
 async function getToken(): Promise<string | null> {
   try {
-    return await SecureStore.getItemAsync(TOKEN_KEY);
+    if (Platform.OS === "web") {
+      const token = localStorage.getItem(TOKEN_KEY);
+      return Promise.resolve(token);
+    } else {
+      return await SecureStore.getItemAsync(TOKEN_KEY);
+    }
   } catch (error) {
     console.error("Erro ao ler o token", error);
     return null;
@@ -32,7 +43,12 @@ async function getToken(): Promise<string | null> {
 
 async function removeToken(): Promise<void> {
   try {
-    await SecureStore.deleteItemAsync(TOKEN_KEY);
+    if (Platform.OS === "web") {
+      localStorage.removeItem(TOKEN_KEY);
+      return Promise.resolve();
+    } else {
+      return await SecureStore.deleteItemAsync(TOKEN_KEY);
+    }
   } catch (error) {
     console.error("Erro ao remover o token", error);
   }
