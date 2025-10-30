@@ -31,14 +31,14 @@ export const setupAuthInterceptor = (signOut: () => Promise<void>) => {
 export default api;
 
 export const fetchSensors = async (): Promise<Sensor[]> => {
-  const response = await api.get<Sensor[]>("readings");
+  const response = await api.get<Sensor[]>("v2/readings");
   return response.data;
 };
 
 export const fetchSensorWithHistory = async (
   id: number,
 ): Promise<SensorWithHistory> => {
-  const response = await api.get<SensorWithHistory>(`readings/${id}`);
+  const response = await api.get<SensorWithHistory>(`v2/readings/${id}`);
   return response.data;
 };
 export const createSensorReading = async (sensorData: {
@@ -46,7 +46,6 @@ export const createSensorReading = async (sensorData: {
   currentValue: number;
   currentStatus: string;
 }): Promise<any> => {
-  const response = await api.post("readings", sensorData);
+  const response = await api.post("v2/readings", sensorData);
   return response.data;
 };
-
