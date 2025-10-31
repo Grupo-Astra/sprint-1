@@ -8,7 +8,8 @@ Integrantes:
 - Leonardo Garcia, RM: 99471
 - Rodrigo Huaman Cabrera, RM: 550227
 
-ASTRA é um aplicativo desenvolvido com o objetivo de criar um gêmeo digital de um sistema pneumático de balancim, amplamente utilizado na indústria têxtil.
+ASTRA é um aplicativo desenvolvido com o objetivo de criar um gêmeo digital
+de um sistema pneumático de balancim, amplamente utilizado na indústria têxtil.
 
 O principal propósito do projeto é:
 
@@ -20,7 +21,7 @@ O principal propósito do projeto é:
 
 - Reduzir o tempo de inatividade com manutenções corretivas.
 
-# 🚀 Como executar
+## 🚀 Como executar
 
 Nesta segunda entrega, o aplicativo está separado em duas partes:
 
@@ -29,7 +30,7 @@ Nesta segunda entrega, o aplicativo está separado em duas partes:
 
 Para funcionar corretamente, as duas partes devem ser executadas simultaneamente.
 
-## Executando o Backend
+### Executando o Backend
 
 Clone o [repositório do backend](https://github.com/Grupo-Astra/apmd-go-api) e siga
 as instruções contidas em seu README para compilar a API ou executar via Docker.
@@ -37,7 +38,7 @@ as instruções contidas em seu README para compilar a API ou executar via Docke
 Com o backend rodando em uma instância do terminal (ou como um
 processo no plano de fundo do sistema), execute o Frontend em outra instância.
 
-## Executando o Frontend
+### Executando o Frontend
 
 Clone o repositório e, dentro da pasta do projeto, baixe as dependências com:
 
@@ -57,22 +58,32 @@ Pressione `w` para abrir no navegador (web);
 
 Ou escaneie o QR Code com o seu celular para rodar em um dispositivo móvel.
 
-# 🖼 Protótipo no Figma
+## 🖼 Protótipo no Figma
 
 Acesse o layout completo do projeto no Figma:
 
 ### 🔗 [Figma - Protótipo ASTRA](https://www.figma.com/design/QCd382CXlcN2zXRg6NND32/Untitled?node-id=1-179&t=XpYw7EAwRIXr0YYA-1)
 
-# 📱 Telas do aplicativo
+## 📱 Telas do aplicativo
 
-O aplicativo ASTRA conta com as seguintes telas principais:
+O aplicativo ASTRA conta com as seguintes telas, divididas entre o fluxo
+de autenticação e as telas principais da aplicação (acessíveis após o login):
 
-- Splash Screen: tela inicial de carregamento;
+- **Splash Screen**: Tela inicial de carregamento. Verifica se o usuário já possui
+  um token de autenticação válido para direcioná-lo automaticamente para a Home.
 
-- Apresentação (Home): introdução ao projeto;
+### Fluxo de Autenticação (Telas Públicas)
 
-- Histórico: visualização dos registros de funcionamento;
+- **Login**: Tela para entrada no sistema com usuário e senha. Oferece acesso ao
+  cadastro e à redefinição de senha.
+- **Cadastro**: Tela para registro de novos usuários no sistema.
+- **Redefinir Senha**: Tela pública que permite ao usuário redefinir sua senha
+  fornecendo o nome de usuário e uma nova senha.
 
-- Notificações: alertas e avisos importantes em tempo real (mock);
+### Fluxo Principal (Telas Privadas)
 
-- Componentes: monitoramento individual de cada componente do sistema pneumático.
+- **Apresentação (Home)**: Introdução ao projeto e visão geral do sistema pneumático.
+- **Histórico**: Visualização dos registros de funcionamento do sistema.
+- **Notificações**: Alertas e avisos importantes em tempo real (mock).
+- **Componentes**: Monitoramento individual de cada componente do sistema pneumático.
+- **Perfil**: Exibe os dados do usuário e botão de "Sair" (Logout) do aplicativo.
