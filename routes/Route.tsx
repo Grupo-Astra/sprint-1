@@ -7,6 +7,7 @@ import { Notifications } from "@/pages/notifications/Notifications";
 import { NovaLeitura } from "@/pages/nova-leitura";
 import { Profile } from "@/pages/profile/Profile";
 import { Register } from "@/pages/register/Register";
+import { ResetPassword } from "@/pages/reset-password/ResetPassword";
 import { RootStackParamList } from "@/types/navigation";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -61,6 +62,11 @@ function AuthStack() {
       <AuthStackNav.Screen
         name="Register"
         component={Register}
+        options={{ headerShown: false }}
+      />
+      <AuthStackNav.Screen
+        name="ResetPassword"
+        component={ResetPassword}
         options={{ headerShown: false }}
       />
     </AuthStackNav.Navigator>

@@ -9,6 +9,7 @@ export type RootStackParamList = {
   Profile: undefined;
   Login: undefined;
   Register: undefined;
+  ResetPassword: undefined;
 };
 
 export type Props = NativeStackScreenProps<RootStackParamList>;

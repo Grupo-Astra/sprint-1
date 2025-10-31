@@ -59,11 +59,18 @@ export function Login({ navigation }: Props) {
           <View style={styles.buttonGap}>
             <Button title="Login" onPress={handleLogin} />
           </View>
-          <Button
-            title="Cadastrar"
-            onPress={() => navigation.navigate("Register")}
-            color="#888"
-          />
+          <View style={styles.buttonGap}>
+            <Button
+              title="Cadastrar"
+              onPress={() => navigation.navigate("Register")}
+              color="#888"
+            />
+            <Button
+              title="Esqueceu a senha?"
+              onPress={() => navigation.navigate("ResetPassword")}
+              color="#555"
+            />
+          </View>
         </>
       )}
     </View>

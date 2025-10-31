@@ -1,3 +1,4 @@
+import { ResetPasswordData } from "@/types/resetPasswordData";
 import { Sensor } from "@/types/sensor";
 import { SensorWithHistory } from "@/types/sensorWithHistory";
 import { UserData } from "@/types/userData";
@@ -53,5 +54,10 @@ export const createSensorReading = async (sensorData: {
 
 export const fetchUserData = async (): Promise<UserData> => {
   const response = await api.get<UserData>("v2/users/me");
+  return response.data;
+};
+
+export const resetPassword = async (data: ResetPasswordData): Promise<any> => {
+  const response = await api.post("/auth/reset-password", data);
   return response.data;
 };
