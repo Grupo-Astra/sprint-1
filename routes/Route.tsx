@@ -1,29 +1,80 @@
+import { useAuth } from "@/contexts/AuthContext";
 import { ComponentsList } from "@/pages/components-lists/ComponentsList";
+import { History } from "@/pages/history/History";
 import { Home } from "@/pages/home/Home";
+import { Login } from "@/pages/login/Login";
 import { Notifications } from "@/pages/notifications/Notifications";
+import { NovaLeitura } from "@/pages/nova-leitura";
+import { Profile } from "@/pages/profile/Profile";
+import { Register } from "@/pages/register/Register";
+import { ResetPassword } from "@/pages/reset-password/ResetPassword";
 import { RootStackParamList } from "@/types/navigation";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const AppStackNav = createNativeStackNavigator<RootStackParamList>();
+const AuthStackNav = createNativeStackNavigator<RootStackParamList>();
 
-export default function Route() {
+function AppStack() {
   return (
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen
+    <AppStackNav.Navigator initialRouteName="Home">
+      <AppStackNav.Screen
         name="Home"
         component={Home}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
+      <AppStackNav.Screen
         name="Notifications"
         component={Notifications}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
+      <AppStackNav.Screen
         name="ComponentsList"
         component={ComponentsList}
         options={{ headerShown: false }}
       />
-    </Stack.Navigator>
+      <AppStackNav.Screen
+        name="History"
+        component={History}
+        options={{ headerShown: false }}
+      />
+      <AppStackNav.Screen
+        name="NovaLeitura"
+        component={NovaLeitura}
+        options={{ headerShown: false }}
+      />
+      <AppStackNav.Screen
+        name="Profile"
+        component={Profile}
+        options={{ headerShown: false }}
+      />
+    </AppStackNav.Navigator>
   );
+}
+
+function AuthStack() {
+  return (
+    <AuthStackNav.Navigator initialRouteName="Login">
+      <AuthStackNav.Screen
+        name="Login"
+        component={Login}
+        options={{ headerShown: false }}
+      />
+      <AuthStackNav.Screen
+        name="Register"
+        component={Register}
+        options={{ headerShown: false }}
+      />
+      <AuthStackNav.Screen
+        name="ResetPassword"
+        component={ResetPassword}
+        options={{ headerShown: false }}
+      />
+    </AuthStackNav.Navigator>
+  );
+}
+
+export default function Route() {
+  const { userToken } = useAuth();
+
+  return <>{userToken ? <AppStack /> : <AuthStack />}</>;
 }

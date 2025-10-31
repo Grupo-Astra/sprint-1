@@ -1,9 +1,11 @@
-import { Image } from "react-native";
+import { Image, useWindowDimensions } from "react-native";
 import * as S from "./styles";
 
 export const SplashScreen = () => {
+  const { height } = useWindowDimensions();
+
   return (
-    <S.SplashContainer>
+    <S.SplashContainer height={height}>
       <S.SplashTitle>FESTO</S.SplashTitle>
       <S.SplashSubTitle>Challenge</S.SplashSubTitle>
       <S.Image>

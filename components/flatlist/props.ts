@@ -1,10 +1,5 @@
-export interface SensorData {
-  nome: string;
-  valor: string;
-  ultimaAtualizacao: string;
-  status: string;
-}
+import { Sensor } from "@/types/sensor";
 
 export interface FlatListProps {
-  data: SensorData[];
+  data: Sensor[];
 }

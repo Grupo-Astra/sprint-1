@@ -1,50 +1,89 @@
-# Welcome to your Expo app 👋
+# ⭐ ASTRA ⭐
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Integrantes:
 
-## Get started
+- Guilherme Pagani, RM: 99445
+- Júlia Santos, RM: 97897
+- Kauê Miziara, RM: 550451
+- Leonardo Garcia, RM: 99471
+- Rodrigo Huaman Cabrera, RM: 550227
 
-1. Install dependencies
+ASTRA é um aplicativo desenvolvido com o objetivo de criar um gêmeo digital
+de um sistema pneumático de balancim, amplamente utilizado na indústria têxtil.
 
-   ```bash
-   npm install
-   ```
+O principal propósito do projeto é:
 
-2. Start the app
+- Simular digitalmente o funcionamento do equipamento físico;
 
-   ```bash
-   npx expo start
-   ```
+- Monitorar em tempo real o status de todos os componentes;
 
-In the output, you'll find options to open the app in a
+- Prevenir falhas por meio de análises preditivas;
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Reduzir o tempo de inatividade com manutenções corretivas.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 🚀 Como executar
 
-## Get a fresh project
+Nesta segunda entrega, o aplicativo está separado em duas partes:
 
-When you're ready, run:
+- Frontend, neste repositório;
+- Backend, disponível no [seguinte repositório](https://github.com/Grupo-Astra/apmd-go-api).
 
-```bash
-npm run reset-project
+Para funcionar corretamente, as duas partes devem ser executadas simultaneamente.
+
+### Executando o Backend
+
+Clone o [repositório do backend](https://github.com/Grupo-Astra/apmd-go-api) e siga
+as instruções contidas em seu README para compilar a API ou executar via Docker.
+
+Com o backend rodando em uma instância do terminal (ou como um
+processo no plano de fundo do sistema), execute o Frontend em outra instância.
+
+### Executando o Frontend
+
+Clone o repositório e, dentro da pasta do projeto, baixe as dependências com:
+
+```sh
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Então, para iniciar o aplicativo, execute:
 
-## Learn more
+```sh
+npm start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Em seguida:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Pressione `w` para abrir no navegador (web);
 
-## Join the community
+Ou escaneie o QR Code com o seu celular para rodar em um dispositivo móvel.
 
-Join our community of developers creating universal apps.
+## 🖼 Protótipo no Figma
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Acesse o layout completo do projeto no Figma:
+
+### 🔗 [Figma - Protótipo ASTRA](https://www.figma.com/design/QCd382CXlcN2zXRg6NND32/Untitled?node-id=1-179&t=XpYw7EAwRIXr0YYA-1)
+
+## 📱 Telas do aplicativo
+
+O aplicativo ASTRA conta com as seguintes telas, divididas entre o fluxo
+de autenticação e as telas principais da aplicação (acessíveis após o login):
+
+- **Splash Screen**: Tela inicial de carregamento. Verifica se o usuário já possui
+  um token de autenticação válido para direcioná-lo automaticamente para a Home.
+
+### Fluxo de Autenticação (Telas Públicas)
+
+- **Login**: Tela para entrada no sistema com usuário e senha. Oferece acesso ao
+  cadastro e à redefinição de senha.
+- **Cadastro**: Tela para registro de novos usuários no sistema.
+- **Redefinir Senha**: Tela pública que permite ao usuário redefinir sua senha
+  fornecendo o nome de usuário e uma nova senha.
+
+### Fluxo Principal (Telas Privadas)
+
+- **Apresentação (Home)**: Introdução ao projeto e visão geral do sistema pneumático.
+- **Histórico**: Visualização dos registros de funcionamento do sistema.
+- **Notificações**: Alertas e avisos importantes em tempo real (mock).
+- **Componentes**: Monitoramento individual de cada componente do sistema pneumático.
+- **Perfil**: Exibe os dados do usuário e botão de "Sair" (Logout) do aplicativo.

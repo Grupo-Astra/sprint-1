@@ -30,7 +30,7 @@ export const Presentation = styled.Text`
 
 export const ImageWrapper = styled.View`
   align-items: center;
-  /* margin-bottom: 30px; */
+  padding-bottom: 90px;
 `;
 
 export const LogoImage = styled.Image`
@@ -38,7 +38,13 @@ export const LogoImage = styled.Image`
   height: 150px;
   resize: contain;
 `;
-
-export const Nav = styled.View`
-  margin-bottom: 0;
+export const NavBarContainer = styled.View`
+  height: 80px;
+  background-color: #0294a6;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
 `;
