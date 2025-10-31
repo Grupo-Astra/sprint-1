@@ -7,10 +7,11 @@ import React, {
   useState,
 } from "react";
 import * as SecureStore from "expo-secure-store";
-import api, { setupAuthInterceptor } from "@/services/api";
+import api, { fetchUserData, setupAuthInterceptor } from "@/services/api";
 import { Credentials } from "@/types/credentials";
 import axios from "axios";
 import { Platform } from "react-native";
+import { UserData } from "@/types/userData";
 
 const TOKEN_KEY = "user_token";
 
@@ -56,6 +57,7 @@ async function removeToken(): Promise<void> {
 
 interface AuthContextData {
   userToken: string | null;
+  user: UserData | null;
   isLoading: boolean;
   error: string | null;
   signIn: (credentials: Credentials) => Promise<void>;
@@ -71,8 +73,18 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [userToken, setUserToken] = useState<string | null>(null);
+  const [user, setUser] = useState<UserData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const loadUserData = async () => {
+    try {
+      const userData = await fetchUserData();
+      setUser(userData);
+    } catch (e) {
+      console.error("Falha ao carregar dados do usuário", e);
+    }
+  };
 
   useEffect(() => {
     async function loadTokenFromStorage() {
@@ -80,6 +92,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (storedToken) {
         api.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
         setUserToken(storedToken);
+        await loadUserData();
       }
       setIsLoading(false);
     }
@@ -98,6 +111,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         await saveToken(token);
         setUserToken(token);
+        await loadUserData();
       } else {
         setError("Token não recebido da API.");
       }
@@ -142,6 +156,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       await removeToken();
       delete api.defaults.headers.common["Authorization"];
       setUserToken(null);
+      setUser(null);
     } catch (e) {
       console.error("Erro no signOut:", e);
       setError("Erro ao tentar sair.");
@@ -156,7 +171,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ userToken, isLoading, error, signIn, signOut, signUp }}
+      value={{ userToken, user, isLoading, error, signIn, signOut, signUp }}
     >
       {children}
     </AuthContext.Provider>

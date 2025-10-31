@@ -1,5 +1,6 @@
 import { Sensor } from "@/types/sensor";
 import { SensorWithHistory } from "@/types/sensorWithHistory";
+import { UserData } from "@/types/userData";
 import axios from "axios";
 
 const api = axios.create({
@@ -47,5 +48,10 @@ export const createSensorReading = async (sensorData: {
   currentStatus: string;
 }): Promise<any> => {
   const response = await api.post("v2/readings", sensorData);
+  return response.data;
+};
+
+export const fetchUserData = async (): Promise<UserData> => {
+  const response = await api.get<UserData>("v2/users/me");
   return response.data;
 };
